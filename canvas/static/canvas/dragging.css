@@ -1,0 +1,30 @@
+.draggable {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #e8e8e8;
+  border: solid;
+  border-width: thin;
+}
+.handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    cursor: move;
+}
+.boton-mas {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #f3f3f3;
+  border: dashed;
+  border-radius: 50%;
+  border-width: thin;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

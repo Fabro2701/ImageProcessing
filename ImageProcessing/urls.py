@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from canvas import views as canvas_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('canvas/', canvas_views.home, name='canvas_home'),
 ]
