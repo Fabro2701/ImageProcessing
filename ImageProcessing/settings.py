@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jobs.apps.JobsConfig',
     'canvas.apps.CanvasConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,7 +121,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'canvas/static/'
+    BASE_DIR / 'canvas/static/',
+    BASE_DIR / 'jobs/static/'
 ]
 
 # Default primary key field type
