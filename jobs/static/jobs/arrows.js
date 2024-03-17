@@ -9,7 +9,7 @@ interact('.arrow').draggable({
                 //event.target.classList.add('dragging');
             },
             move(event) {
-            //console.log('yydragggginy')
+            //console.log(event.target.parentNode.dataset.op_id,event.relatedTarget?event.relatedTarget.parentNode.dataset.op_id:0);
             },
             end(event) {
                 //event.target.classList.remove('dragging');
@@ -20,16 +20,13 @@ interact('.arrow').draggable({
 interact('.draggable-canvas').dropzone({
         accept: '.arrow-out',
         ondrop(event) {
-
+            console.log(event);
             const targetElement = event.currentTarget.parentNode;
-
-            console.log(targetElement);
-
-            arrowIn = targetElement.parentNode.querySelector('.arrow-in');
+            arrowIn = targetElement.querySelector('.arrow-in');
             arrowOut = event.relatedTarget;
 
             if(arrowIn){
-
+                //console.log(arrowIn.parentNode.dataset.op_id,arrowOut.parentNode.dataset.op_id);
 
                 var punto1X = parseInt(arrowOut.parentNode.style.left,10)+ parseInt((arrowOut.parentNode.getAttribute('data-x') || 0),10) + parseInt(arrowOut.parentNode.getAttribute('width'),10) *0.9+2;
                 var punto1Y = parseInt(arrowOut.parentNode.style.top,10)+ parseInt((arrowOut.parentNode.getAttribute('data-y') || 0),10) + parseInt(arrowOut.parentNode.getAttribute('height'),10)*0.32+2;
