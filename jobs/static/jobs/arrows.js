@@ -36,10 +36,7 @@ interact('.draggable-canvas').dropzone({
                 var punto2X = parseInt(arrowIn.parentNode.style.left,10)+ parseInt((arrowIn.parentNode.getAttribute('data-x') || 0),10) + parseInt(arrowIn.parentNode.getAttribute('width'),10) *0.1+2;
                 var punto2Y = parseInt(arrowIn.parentNode.style.top,10)+ parseInt((arrowIn.parentNode.getAttribute('data-y') || 0),10) + parseInt(arrowIn.parentNode.getAttribute('height'),10)*0.32+2;
 
-                console.log(parseInt(arrowIn.parentNode.style.left,10));
-                console.log((arrowIn.parentNode.getAttribute('data-x') || 0));
-                console.log(parseInt(arrowIn.parentNode.getAttribute('width'),10));
-                console.log(punto2X);
+
                 var distancia = Math.sqrt(Math.pow(punto2X - punto1X, 2) + Math.pow(punto2Y - punto1Y, 2));
                 var angulo = Math.atan2(punto2Y - punto1Y, punto2X - punto1X);
 
@@ -52,7 +49,13 @@ interact('.draggable-canvas').dropzone({
                 linea.style.position='absolute';
                 linea.style.border = '1px solid black'
 
-                console.log(linea)
+                linea.dataset.in_elem = arrowIn.parentNode.dataset.op_id;
+                linea.dataset.out_elem = arrowOut.parentNode.dataset.op_id;
+                linea.dataset.in_pointx = punto1X;
+                linea.dataset.in_pointy = punto1Y;
+                linea.dataset.out_pointx = punto2X;
+                linea.dataset.out_pointy = punto2Y;
+                linea.classList.add('connecting-line');
 
                 // Agregar la línea al SVG
                 document.getElementById("canvas-container").appendChild(linea);
