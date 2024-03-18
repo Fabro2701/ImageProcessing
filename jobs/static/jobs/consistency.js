@@ -1,13 +1,33 @@
 
-
+var formulariosPorElemento;
 // Función para guardar el contenido del elemento en el localStorage
 function guardarContenido() {
-    var contenido = document.getElementById('canvas-container').innerHTML;
+    var contenido = document.getElementById('canvas-container').outerHTML;
+
     localStorage.setItem('canvas-container', contenido);
+    let aux = {};
+    for (var key in formulariosPorElemento) {
+        aux[key] = formulariosPorElemento[key].innerHTML;
+        console.log(aux[key]);
+    }
+    localStorage.setItem('formulariosPorElemento', JSON.stringify(aux));
 }
 
 // Función para cargar el contenido guardado del localStorage
 function cargarContenido() {
+    formulariosPorElemento = {}
+    if(localStorage.getItem('formulariosPorElemento')){
+        var aux = JSON.parse(localStorage.getItem('formulariosPorElemento'));
+
+        for (var key in aux) {
+            var elemento = document.createElement('form');
+            elemento.id = key;
+            elemento.innerHTML = aux[key];
+            console.log(key,aux[key]);
+            formulariosPorElemento[key] = elemento;
+        }
+    }
+
 
     var contenidoGuardado = localStorage.getItem('canvas-container');
     if (contenidoGuardado) {
