@@ -28,6 +28,7 @@ interact('.canvas-container').dropzone({
             draggableElement.style.left = event.dragEvent.pageX-event.currentTarget.getBoundingClientRect().left -5 +'px';
             draggableElement.style.top = event.dragEvent.pageY-event.currentTarget.getBoundingClientRect().top -5 +'px';
             draggableElement.style.position = 'absolute';
+            draggableElement.id = 'opid_'+id_counter;
             draggableElement.dataset.op_id = 'opid_'+id_counter;
             id_counter++;
 
