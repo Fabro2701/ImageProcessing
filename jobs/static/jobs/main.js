@@ -15,7 +15,7 @@ interact('.draggable-menu').draggable({
             }
         }
     });
-let id_counter = 0
+let id_counter = (localStorage.getItem('id_counter')||0);
 interact('.canvas-container').dropzone({
         accept: '.draggable-menu',
         ondrop(event) {
@@ -31,6 +31,7 @@ interact('.canvas-container').dropzone({
             draggableElement.id = 'opid_'+id_counter;
             draggableElement.dataset.op_id = 'opid_'+id_counter;
             id_counter++;
+            localStorage.setItem('id_counter',id_counter);
 
 
             event.currentTarget.appendChild(draggableElement);
