@@ -1,8 +1,22 @@
 
 var formulariosPorElemento;
+
+function clearComponents(){
+  var componente = document.getElementById('canvas-container');
+  var nhijos = componente.children.length;
+  for (var i = 0; i < nhijos-1; i++) {
+      componente.lastChild.remove();
+  }
+  if(localStorage.getItem('formulariosPorElemento')){
+      localStorage.removeItem('formulariosPorElemento');
+  }
+  formulariosPorElemento = {};
+}
 // Función para guardar el contenido del elemento en el localStorage
 function guardarContenido() {
-    var contenido = document.getElementById('canvas-container').outerHTML;
+  var componente = document.getElementById('canvas-container');
+  componente.children[0].remove();
+    var contenido = componente.innerHTML;
 
     localStorage.setItem('canvas-container', contenido);
     let aux = {};
@@ -31,9 +45,12 @@ function cargarContenido() {
 
     var contenidoGuardado = localStorage.getItem('canvas-container');
     if (contenidoGuardado) {
-        document.getElementById('canvas-container').innerHTML = contenidoGuardado;
+        const comp = document.getElementById('canvas-container');
+        comp.innerHTML = comp.innerHTML+contenidoGuardado;
     }
-        Array.from(document.getElementsByClassName('selected')).forEach(e=>e.classList.remove('selected'));
+
+
+    Array.from(document.getElementsByClassName('selected')).forEach(e=>e.classList.remove('selected'));
 
 }
 
