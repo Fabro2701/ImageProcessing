@@ -28,3 +28,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#imgs_container {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  background-color: #f3f3f3;
+}
+.run-button{
+
+  position: relative;
+  width: 50px;
+  height: 30px;
+  background-color: #ff8989;
+  top: 0;
+  left: 0%;
+}

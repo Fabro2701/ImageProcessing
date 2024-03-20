@@ -9,13 +9,14 @@
 
 {% block content %}
 <div id="imgs_container">
-
+    <button class="run-button" onclick="runProcess()">Run</button>
 </div>
 
 {% endblock content %}
 
 
 {% block extra_script %}
+    <script src="{% static 'canvas/images.js' %}"></script>
     <script src="{% static 'canvas/dragging.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 

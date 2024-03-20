@@ -28,3 +28,12 @@
 .selected{
     filter: drop-shadow(0px 0px 4px #e3ca00);
 }
+#clear-button{
+
+  position: relative;
+  width: 50px;
+  height: 30px;
+  background-color: #ff8989;
+  top: 0;
+  left: 0%;
+}

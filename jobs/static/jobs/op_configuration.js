@@ -1,18 +1,4 @@
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+
 
 // Objeto para almacenar los formularios generados por elemento
 
@@ -36,43 +22,28 @@ interact('.draggable-canvas')
 
 function generarFormulario(id,op_type) {
     let formularioHTML;
-    const csrfToken = getCookie('csrftoken');
     if(op_type==='input'||op_type==='output'){
         formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
                                     '<label for="id">ID: </label>' +
                                     '<input id="id" type="text" name="id"><br></form>';
     }
     else if(op_type==='shift'){
         formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="left">Left: </label>' +
-                                    '<input id="left" type="text" name="left" value="0"><br>' +
-                                    '<label for="right">Right: </label>' +
-                                    '<input id="right" type="text" name="right" value="0"><br>' +
-                                    '<label for="top">Top: </label>' +
-                                    '<input id="top" type="text" name="top" value="0"><br>' +
-                                    '<label for="bottom">Bottom: </label>' +
-                                    '<input id="bottom" type="text" name="bottom" value="0"><br>' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<label for="x-shift">X-shift: </label>' +
+                                    '<input id="x-shift" type="text" name="x-shift" value="0"><br>' +
+                                    '<label for="y-shift">Y-shift: </label>' +
+                                    '<input id="y-shift" type="text" name="y-shift" value="0"><br>' +
+                                    '<label for="fillValue">Fill value: </label>' +
+                                    '<input id="fillValue" type="text" name="fillValue" value="(0,0,0)"><br>' +
             '</form>';
     }
 
 
-    // Manejar el envío del formulario
-    /*$('#formulario-'+op_type+id).submit(function(event) {
-        event.preventDefault();
-        var formData = $(this).serialize();
 
-        $.ajax({
-            url: '/jobs/',
-            type: 'POST',
-            headers: {
-                'X-CSRFToken': csrfToken,
-            },
-            data: formData
-        });
-    });
-    */
     // Devolver el formulario generado
     const form = document.createElement('form');
     form.innerHTML = formularioHTML;
