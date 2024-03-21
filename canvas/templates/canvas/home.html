@@ -12,16 +12,12 @@
     <button class="run-button" onclick="runProcess()">Run</button>
 </div>
 
-    <h1>Imágenes</h1>
-    {% for r in results %}
-        <h2>{{ r.id }}</h2>
-        <img src="{% static r.path %}" alt="{{ r.id }}">
-    {% endfor %}
 
 {% endblock content %}
 
 
 {% block extra_script %}
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 
     <script src="{% static 'canvas/images.js' %}"></script>
     <script src="{% static 'canvas/dragging.js' %}"></script>

@@ -16,9 +16,6 @@ function addImageContainer(x=0, y=0) {
   newElem.style.left = x + 'px';
   newElem.style.top = y + 'px';
 
-  const dragHandle = document.createElement('div');
-  dragHandle.classList.add('handle');
-  newElem.appendChild(dragHandle);
 
   const botonMas = document.createElement('button');
   botonMas.classList.add('boton-mas');
@@ -28,30 +25,24 @@ function addImageContainer(x=0, y=0) {
 
   cont.appendChild(newElem);
 
-
-  dragHandle.addEventListener('mousedown', startDrag);
-
   dragg_counter++;
 }
-function startDrag(e) {
-  e.preventDefault();
 
-  const draggableElement = e.target.parentNode;
-  const startX = e.clientX - draggableElement.offsetLeft;
-  const startY = e.clientY - draggableElement.offsetTop;
+interact('.draggable').draggable({
+  listeners: {
+    move (event) {
+      console.log(11);
+        var target = event.target;
+          // keep the dragged position in the data-x/data-y attributes
+          var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+          var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
-  document.addEventListener('mousemove', drag);
-  document.addEventListener('mouseup', stopDrag);
+          // translate the element
+          target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
 
-  // Función para arrastrar el elemento
-  function drag(e) {
-    draggableElement.style.left = (e.clientX - startX) + 'px';
-    draggableElement.style.top = (e.clientY - startY) + 'px';
+          // update the position attributes
+          target.setAttribute('data-x', x)
+          target.setAttribute('data-y', y)
+    },
   }
-
-  // Función para detener el arrastre
-  function stopDrag() {
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', stopDrag);
-  }
-}
+})
