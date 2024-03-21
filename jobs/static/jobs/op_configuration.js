@@ -1,6 +1,19 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
-
-// Objeto para almacenar los formularios generados por elemento
 
 
 interact('.draggable-canvas')
@@ -22,12 +35,23 @@ interact('.draggable-canvas')
 
 function generarFormulario(id,op_type) {
     let formularioHTML;
-    if(op_type==='input'||op_type==='output'){
+    if(op_type==='input'){
         formularioHTML = '<form id="formulario-'+id+'">' +
                                     '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
                                     '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
                                     '<label for="id">ID: </label>' +
-                                    '<input id="id" type="text" name="id"><br></form>';
+                                    '<input id="id" type="text" name="id"><br>' +
+                                    '<label for="source">Source: </label>' +
+                                    '<input id="source" type="file" name="source"><br>' +
+                        '</form>';
+    }
+    else if(op_type==='output'){
+        formularioHTML = '<form id="formulario-'+id+'">' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<label for="id">ID: </label>' +
+                                    '<input id="id" type="text" name="id"><br>' +
+                        '</form>';
     }
     else if(op_type==='shift'){
         formularioHTML = '<form id="formulario-'+id+'">' +
@@ -54,16 +78,34 @@ $('#config-container').on('input', 'input', function() {
     var formId = $(this).closest('form').attr('id');
     var fieldName = $(this).attr('name');
     var fieldValue = $(this).val();
-    //console.log($(this));
-   //console.log($(this).closest('form'));
+    console.log($(this));
 
-    //formulariosPorElemento[formId.substring(16)].formData[fieldName] = fieldValue;
-    var x = formulariosPorElemento[formId.substring(11)].querySelector('#' + $(this).attr('id'));
-    x.setAttribute('value',fieldValue) ;
-    console.log(formulariosPorElemento[formId.substring(11)]);
-    // Actualizar los datos del formulario en el objeto
-    //formulariosPorElemento[formId.substring(16)].formData[fieldName] = fieldValue;
-    //$(this).setAttribute('value',fieldValue);
-    //var input_field = $(this).closest('form').find('#' + $(this).attr('id'));
-    //input_field.val(fieldValue);
+    if(fieldName==='source'){
+        var file = $(this).prop('files')[0];
+        var formData = new FormData();
+        formData.append('image', file);
+
+        var x = formulariosPorElemento[formId.substring(11)].querySelector('#' + $(this).attr('id'));
+        x.setAttribute('value',file.name) ;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload_image/', true);
+        const csrfToken = getCookie('csrftoken');
+        xhr.setRequestHeader('X-CSRFToken', csrfToken);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log('Imagen subida correctamente.');
+            } else {
+                console.log('Error al subir la imagen.');
+            }
+        };
+        xhr.send(formData);
+    }
+    else{
+        var x = formulariosPorElemento[formId.substring(11)].querySelector('#' + $(this).attr('id'));
+        x.setAttribute('value',fieldValue) ;
+    }
+
+
+
 });

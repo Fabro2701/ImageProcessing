@@ -35,7 +35,7 @@ function cargarContenido() {
 
         for (var key in aux) {
             var elemento = document.createElement('form');
-            elemento.id = key;
+            elemento.id = "formulario-"+key;
             elemento.innerHTML = aux[key];
             console.log(key,aux[key]);
             formulariosPorElemento[key] = elemento;

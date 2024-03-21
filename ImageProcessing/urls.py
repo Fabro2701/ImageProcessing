@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('canvas/', canvas_views.home, name='canvas_home'),
     path('jobs/', jobs_views.home, name='jobs_home'),
+    path('upload_image/', canvas_views.upload_image, name='upload_image'),
+
 ]
