@@ -13,8 +13,9 @@ function generate_menu(){
                                                                                    {img:'op_output.svg', label:'Output', op_type:'output', in:true, out:false}])
     var basicSection = generate_section('Basic', '2', [{img:'op_basic.svg', label:'Shift', op_type:'shift', in:true, out:true},
                                                                                      {img:'op_basic.svg', label:'Crop', op_type:'crop', in:true, out:true},
-                                                                                     {img:'op_basic.svg', label:'Resize', op_type:'resize', in:true, out:true}])
-    var thresholdSection = generate_section('Threshold', '2', [{img:'op_threshold.svg', label:'t1', op_type:'t1', in:true, out:true},
+                                                                                     {img:'op_basic.svg', label:'Resize', op_type:'resize', in:true, out:true},
+                                                                                     {img:'op_basic.svg', label:'Gray', op_type:'gray', in:true, out:true}])
+    var thresholdSection = generate_section('Threshold', '2', [{img:'op_threshold.svg', label:'Global', op_type:'global_threshold', in:true, out:true},
                                                                                      {img:'op_threshold.svg', label:'t2', op_type:'t2', in:true, out:true},
                                                                                      {img:'op_threshold.svg', label:'t3', op_type:'t3', in:true, out:true},
                                                                                      {img:'op_threshold.svg', label:'t4', op_type:'t4', in:true, out:true}])

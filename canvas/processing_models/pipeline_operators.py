@@ -1,5 +1,6 @@
-from .basic_operators import TranslateOperator
-from .io_operators import InputOperator,OutputOperator
+from .basic_operators import *
+from .io_operators import *
+from .threshold_operators import *
 class Pipeline:
     def __init__(self):
         self.pipeline_functions = {}
@@ -37,3 +38,9 @@ class Pipeline:
                 self.add_function(OutputOperator(config), node_id)
             elif config['op_type'] == 'shift':
                 self.add_function(TranslateOperator(config), node_id)
+            elif config['op_type'] == 'resize':
+                self.add_function(ResizeOperator(config), node_id)
+            elif config['op_type'] == 'gray':
+                self.add_function(GrayOperator(config), node_id)
+            elif config['op_type'] == 'global_threshold':
+                self.add_function(GlobalThresholdOperator(config), node_id)

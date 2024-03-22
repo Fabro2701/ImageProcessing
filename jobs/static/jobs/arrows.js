@@ -20,12 +20,12 @@ interact('.arrow').draggable({
 interact('.draggable-canvas').dropzone({
         accept: '.arrow-out',
         ondrop(event) {
-            console.log(event);
             const targetElement = event.currentTarget.parentNode;
             arrowIn = targetElement.querySelector('.arrow-in');
             arrowOut = event.relatedTarget;
 
             if(arrowIn){
+                console.log(arrowIn);
                 //console.log(arrowIn.parentNode.dataset.op_id,arrowOut.parentNode.dataset.op_id);
 
                 var punto1X = parseInt(arrowOut.parentNode.style.left,10)+ parseInt((arrowOut.parentNode.getAttribute('data-x') || 0),10) + parseInt(arrowOut.parentNode.getAttribute('width'),10) *0.9+2;

@@ -65,6 +65,44 @@ function generarFormulario(id,op_type) {
                                     '<input id="fillValue" type="text" name="fillValue" value="(0,0,0)"><br>' +
             '</form>';
     }
+    else if(op_type==='resize'){
+        formularioHTML = '<form id="formulario-'+id+'">' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<label for="x-new">X-new: </label>' +
+                                    '<input id="x-new" type="text" name="x-new" value="100"><br>' +
+                                    '<label for="y-new">Y-new: </label>' +
+                                    '<input id="y-new" type="text" name="y-new" value="100"><br>' +
+            '</form>';
+    }
+    else if(op_type==='crop'){
+        formularioHTML = '<form id="formulario-'+id+'">' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<label for="left">Left: </label>' +
+                                    '<input id="left" type="text" name="left" value="0"><br>' +
+                                    '<label for="right">Right: </label>' +
+                                    '<input id="right" type="text" name="right" value="0"><br>' +
+                                    '<label for="bottom">Bottom: </label>' +
+                                    '<input id="bottom" type="text" name="bottom" value="0"><br>' +
+                                    '<label for="top">Top: </label>' +
+                                    '<input id="top" type="text" name="top" value="0"><br>' +
+            '</form>';
+    }
+    else if(op_type==='gray'){
+        formularioHTML = '<form id="formulario-'+id+'">' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+            '</form>';
+    }
+    else if(op_type==='global_threshold'){
+        formularioHTML = '<form id="formulario-'+id+'">' +
+                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
+                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
+                                    '<label for="threshold">Threshold: </label>' +
+                                    '<input id="threshold" type="text" name="threshold" value="0"><br>' +
+            '</form>';
+    }
 
 
 
@@ -92,7 +130,7 @@ $('#config-container').on('input', 'input', function() {
         xhr.open('POST', '/upload_image/', true);
         const csrfToken = getCookie('csrftoken');
         xhr.setRequestHeader('X-CSRFToken', csrfToken);
-        xhr.onload = function () {
+        xhr.onload =  function () {
             if (xhr.status === 200) {
                 console.log('Imagen subida correctamente.');
             } else {
@@ -106,6 +144,7 @@ $('#config-container').on('input', 'input', function() {
         x.setAttribute('value',fieldValue) ;
     }
 
+    
 
 
 });
