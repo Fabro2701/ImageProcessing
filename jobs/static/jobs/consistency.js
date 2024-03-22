@@ -11,6 +11,7 @@ function clearComponents(){
       localStorage.removeItem('formulariosPorElemento');
   }
   formulariosPorElemento = {};
+  localStorage.removeItem('id_counter');
 }
 // Función para guardar el contenido del elemento en el localStorage
 function guardarContenido() {
@@ -37,7 +38,6 @@ function cargarContenido() {
             var elemento = document.createElement('form');
             elemento.id = "formulario-"+key;
             elemento.innerHTML = aux[key];
-            console.log(key,aux[key]);
             formulariosPorElemento[key] = elemento;
         }
     }

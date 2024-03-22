@@ -6,12 +6,10 @@ interact('.draggable-menu').draggable({
         autoScroll: true,
         listeners: {
             start(event) {
-                //event.target.classList.add('dragging');
             },
             move(event) {
             },
             end(event) {
-                //event.target.classList.remove('dragging');
             }
         }
     });
@@ -32,6 +30,9 @@ interact('.canvas-container').dropzone({
             draggableElement.dataset.op_id = 'opid_'+id_counter;
             id_counter++;
             localStorage.setItem('id_counter',id_counter);
+
+            formulariosPorElemento[draggableElement.id] = generarFormulario(draggableElement.id, draggableElement.dataset.op_type);
+            console.log(formulariosPorElemento[draggableElement.id]);
 
 
             event.currentTarget.appendChild(draggableElement);

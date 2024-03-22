@@ -26,7 +26,8 @@ interact('.draggable-canvas')
     // Verificar si ya existe un formulario para este elemento
     if (!formulariosPorElemento[id]) {
       // Si no existe, generar el formulario y guardarlo en el objeto
-      formulariosPorElemento[id] = generarFormulario(id,op_type);
+      //formulariosPorElemento[id] = generarFormulario(id,op_type);
+        console.log('form not found');
     }
     $('#config-container').html(formulariosPorElemento[id]);
     //document.querySelector('#config-container').appendChild(formulariosPorElemento[id]);
@@ -34,6 +35,7 @@ interact('.draggable-canvas')
   });
 
 function generarFormulario(id,op_type) {
+    console.log(op_type);
     let formularioHTML;
     if(op_type==='input'){
         formularioHTML = '<form id="formulario-'+id+'">' +
@@ -102,6 +104,9 @@ function generarFormulario(id,op_type) {
                                     '<label for="threshold">Threshold: </label>' +
                                     '<input id="threshold" type="text" name="threshold" value="0"><br>' +
             '</form>';
+    }
+    else{
+        console.error('not a valid type', op_type);
     }
 
 
