@@ -11,8 +11,10 @@ function newProcess(){
   cont.appendChild(aux2);
     addImageContainer(50,100);
   addImageContainer(300,100);
+  addImageContainer(550,100);
   addImageContainer(50,350);
   addImageContainer(300,350);
+  addImageContainer(550,350);
 
 }
 function addImageContainer(x=0, y=0) {

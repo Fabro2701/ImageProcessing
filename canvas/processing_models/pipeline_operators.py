@@ -44,3 +44,7 @@ class Pipeline:
                 self.add_function(GrayOperator(config), node_id)
             elif config['op_type'] == 'global_threshold':
                 self.add_function(GlobalThresholdOperator(config), node_id)
+            elif config['op_type'] == 'adaptive_mean_threshold':
+                self.add_function(AdaptiveMeanThresholdOperator(config), node_id)
+            elif config['op_type'] == 'adaptive_gauss_threshold':
+                self.add_function(AdaptiveGaussThresholdOperator(config), node_id)

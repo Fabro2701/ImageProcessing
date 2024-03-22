@@ -65,10 +65,13 @@ function generarFormulario(id,op_type) {
     else if(op_type==='global_threshold'){
         formularioHTML = templateForm(id,op_type,[{id:'threshold',label:'Threshold:',type:'range',value:'',min:'0',max:'255',step:'1'}]);
     }
-    else if(op_type==='adaptive_threshold'){
-        formularioHTML = templateForm(id,op_type,[{id:'block-size',label:'Block size:',type:'text',value:'20'},
-                                                        {id:'c',label:'C:',type:'text',value:'5'},
-                                                        {id:'mode',label:'Mode:',type:'text',value:'5'}]);
+    else if(op_type==='adaptive_mean_threshold'){
+        formularioHTML = templateForm(id,op_type,[{id:'block-size',label:'Block size:',type:'text',value:'21'},
+                                                        {id:'C',label:'C:',type:'text',value:'5'}]);
+    }
+    else if(op_type==='adaptive_gauss_threshold'){
+        formularioHTML = templateForm(id,op_type,[{id:'block-size',label:'Block size:',type:'text',value:'21'},
+                                                        {id:'C',label:'C:',type:'text',value:'5'}]);
     }
     else{
         console.error('not a valid type', op_type);
@@ -144,6 +147,7 @@ function templateForm(id, type, elements){
         inputField.id = element.id;
         inputField.name = element.id;
         inputField.value = element.value;
+        inputField.setAttribute('value', element.value);
         if(element.type==='text'){
             inputField.type = element.type;
         }

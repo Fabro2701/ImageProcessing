@@ -16,8 +16,8 @@ function generate_menu(){
                                                                                      {img:'op_basic.svg', label:'Resize', op_type:'resize', in:true, out:true},
                                                                                      {img:'op_basic.svg', label:'Gray', op_type:'gray', in:true, out:true}])
     var thresholdSection = generate_section('Threshold', '2', [{img:'op_threshold.svg', label:'Global', op_type:'global_threshold', in:true, out:true},
-                                                                                     {img:'op_threshold.svg', label:'Adaptive', op_type:'adaptive_threshold', in:true, out:true},
-                                                                                     {img:'op_threshold.svg', label:'t3', op_type:'t3', in:true, out:true},
+                                                                                     {img:'op_threshold.svg', label:'Adaptive mean', op_type:'adaptive_mean_threshold', in:true, out:true},
+                                                                                     {img:'op_threshold.svg', label:'Adaptive gauss', op_type:'adaptive_gauss_threshold', in:true, out:true},
                                                                                      {img:'op_threshold.svg', label:'t4', op_type:'t4', in:true, out:true}])
 
     var cont = document.querySelector('#accordion');
