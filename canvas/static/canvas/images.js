@@ -32,9 +32,12 @@ function selectImage(id){
             var menuItem = document.createElement('div');
             menuItem.textContent = elemento.querySelector('#id').getAttribute('value');
             menuItem.classList.add('menu-item');
+            menuItem.style.textAlign = 'left';
             menuItem.onclick = function() {
                 // Aquí puedes realizar la acción deseada al seleccionar una imagen
-                document.querySelector('#img'+id).dataset.source = this.textContent;
+                var img = document.querySelector('#img'+id);
+                img.dataset.source = this.textContent;
+                img.firstChild.textContent = this.textContent;
                 console.log('Imagen seleccionada:', this.textContent);
                 document.querySelector('#menu-image-chooser').remove();
                 // Por ejemplo, podrías cargar la imagen correspondiente utilizando this.textContent como clave
@@ -111,13 +114,17 @@ function runProcess(){
 function updateImages(results){
     for(var k in results){
         result = results[k];
-        Array.from(document.querySelectorAll('.image-container')).forEach(function(element){
+        Array.from(document.querySelectorAll('.draggable')).forEach(function(element){
 
-            console.log(element.getAttribute('data-source'));
             if(element.getAttribute('data-source')===result.id){
-                element.innerHTML = '<img src="/static/' + result.path + '">';
-                element.style.height = 0;
-                element.style.width = 0;
+                element.classList.remove('image-container-empty');
+                element.classList.add('image-container-filled');
+                var texte = element.firstChild;
+                element.innerHTML = '';
+                element.appendChild(texte);
+                var img = new Image();
+                img.src = "/static/" + result.path;
+                element.appendChild(img);
             }
         });
     }

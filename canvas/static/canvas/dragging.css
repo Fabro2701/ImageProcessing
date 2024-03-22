@@ -1,10 +1,30 @@
 .draggable {
     position: absolute;
+
+    display: inline-block;
+    text-align: center;
+}
+.image-container-empty{
     width: 150px;
     height: 150px;
     background-color: #e8e8e8;
   border: solid;
   border-width: thin;
+}
+.image-container-filled{
+
+}
+.centered-text {
+    position: relative;
+    width: 100%;
+    bottom: 0px; /* Ajusta la distancia desde el fondo de la imagen */
+    left: 0;
+    color: #000000; /* Color del texto */
+    font-family: Arial, sans-serif; /* Estilo de fuente */
+  }
+.draggable img{
+    width: 100%;
+    height: auto;
 }
 .handle {
     position: absolute;

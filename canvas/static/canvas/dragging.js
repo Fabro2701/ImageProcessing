@@ -11,15 +11,19 @@ function addImageContainer(x=0, y=0) {
   const newElem = document.createElement('div');
   newElem.id =  'img'+dragg_counter;
   newElem.dataset.source = '';
-  newElem.classList.add('draggable');
-  newElem.classList.add('image-container');
+  newElem.classList.add('image-container-empty','draggable');
   newElem.style.left = x + 'px';
   newElem.style.top = y + 'px';
+
+  var textDiv = document.createElement("div");
+  textDiv.classList.add("centered-text");
+  textDiv.textContent = "";
+  newElem.appendChild(textDiv);
 
 
   const botonMas = document.createElement('button');
   botonMas.classList.add('boton-mas');
-  botonMas.innerHTML = '<i class="fas fa-plus"></i>'; // Icono de Font Awesome para "más"
+  botonMas.innerHTML = '<i class="fas fa-plus"></i>';
   botonMas.setAttribute('onclick','selectImage('+dragg_counter+')')
   newElem.appendChild(botonMas);
 
