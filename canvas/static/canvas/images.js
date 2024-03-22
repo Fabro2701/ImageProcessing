@@ -46,6 +46,7 @@ function selectImage(id){
     }
     document.querySelector('#img'+id).appendChild(popupMenu);
 }
+
 function runProcess(){
     var aux = (localStorage.getItem('canvas-container')||'');
     var canvas = document.createElement('div');

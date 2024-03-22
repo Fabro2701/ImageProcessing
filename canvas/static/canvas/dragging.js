@@ -1,9 +1,20 @@
 let dragg_counter = 0;
-addImageContainer(50,100);
-addImageContainer(300,100);
-addImageContainer(50,350);
-addImageContainer(300,350);
 
+
+function newProcess(){
+  const cont = document.getElementById('imgs_container');
+
+  var aux1 = cont.children[0];
+  var aux2 = cont.children[1];
+  cont.innerHTML='';
+  cont.appendChild(aux1);
+  cont.appendChild(aux2);
+    addImageContainer(50,100);
+  addImageContainer(300,100);
+  addImageContainer(50,350);
+  addImageContainer(300,350);
+
+}
 function addImageContainer(x=0, y=0) {
 
   const cont = document.getElementById('imgs_container');

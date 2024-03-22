@@ -64,3 +64,13 @@
   top: 0;
   left: 0%;
 }
+
+.new-button{
+
+  position: relative;
+  width: 50px;
+  height: 30px;
+  background-color: #ff8989;
+  top: 0;
+  left: 10px;
+}
