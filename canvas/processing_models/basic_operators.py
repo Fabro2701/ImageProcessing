@@ -30,8 +30,8 @@ class ResizeOperator:
         self.config = config
 
     def execute(self, img, results):
-        newx = self.config['x-new']
-        newy = self.config['y-new']
+        newx = int(self.config['x-new'])
+        newy = int(self.config['y-new'])
 
         dst = cv.resize(img,(newx, newy))
         return dst

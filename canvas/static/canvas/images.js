@@ -26,7 +26,6 @@ function selectImage(id){
     for(var key in aux){
         var elemento = document.createElement('form');
         elemento.innerHTML = aux[key];
-        console.log(elemento);
         let type = elemento.querySelector('#op_type').getAttribute('value');
         if(type==='input'||type==='output'){
             var menuItem = document.createElement('div');

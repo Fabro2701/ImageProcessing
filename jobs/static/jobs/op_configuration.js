@@ -29,8 +29,8 @@ interact('.draggable-canvas')
       //formulariosPorElemento[id] = generarFormulario(id,op_type);
         console.log('form not found');
     }
-    $('#config-container').html(formulariosPorElemento[id]);
-    //document.querySelector('#config-container').appendChild(formulariosPorElemento[id]);
+    $('#config-container').html('');//formulariosPorElemento[id]
+    document.querySelector('#config-container').appendChild(formulariosPorElemento[id]);
     //formulariosPorElemento[id] = document.querySelector('#config-container').lastChild;
   });
 
@@ -38,72 +38,32 @@ function generarFormulario(id,op_type) {
     console.log(op_type);
     let formularioHTML;
     if(op_type==='input'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="id">ID: </label>' +
-                                    '<input id="id" type="text" name="id"><br>' +
-                                    '<label for="source">Source: </label>' +
-                                    '<input id="source" type="file" name="source"><br>' +
-                        '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'id',label:'ID:',type:'text',value:''},
+                                                  {id:'source',label:'Source:',type:'file',value:''}]);
     }
     else if(op_type==='output'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="id">ID: </label>' +
-                                    '<input id="id" type="text" name="id"><br>' +
-                        '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'id',label:'ID:',type:'text',value:''}]);
     }
     else if(op_type==='shift'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="x-shift">X-shift: </label>' +
-                                    '<input id="x-shift" type="text" name="x-shift" value="0"><br>' +
-                                    '<label for="y-shift">Y-shift: </label>' +
-                                    '<input id="y-shift" type="text" name="y-shift" value="0"><br>' +
-                                    '<label for="fillValue">Fill value: </label>' +
-                                    '<input id="fillValue" type="text" name="fillValue" value="(0,0,0)"><br>' +
-            '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'x-shift',label:'X-shift:',type:'text',value:'0'},
+                                                  {id:'y-shift',label:'Y-shift:',type:'text',value:'0'},
+                                                  {id:'fillValue',label:'Fill value:',type:'text',value:"(0,0,0)"}]);
     }
     else if(op_type==='resize'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="x-new">X-new: </label>' +
-                                    '<input id="x-new" type="text" name="x-new" value="100"><br>' +
-                                    '<label for="y-new">Y-new: </label>' +
-                                    '<input id="y-new" type="text" name="y-new" value="100"><br>' +
-            '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'x-new',label:'X-new:',type:'text',value:'100'},
+                                                  {id:'y-new',label:'Y-new:',type:'text',value:'100'}]);
     }
     else if(op_type==='crop'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="left">Left: </label>' +
-                                    '<input id="left" type="text" name="left" value="0"><br>' +
-                                    '<label for="right">Right: </label>' +
-                                    '<input id="right" type="text" name="right" value="0"><br>' +
-                                    '<label for="bottom">Bottom: </label>' +
-                                    '<input id="bottom" type="text" name="bottom" value="0"><br>' +
-                                    '<label for="top">Top: </label>' +
-                                    '<input id="top" type="text" name="top" value="0"><br>' +
-            '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'left',label:'Left:',type:'text',value:'0'},
+                                                  {id:'right',label:'Right:',type:'text',value:'0'},
+                                                  {id:'bottom',label:'Bottom:',type:'text',value:'0'},
+                                                  {id:'top',label:'Top:',type:'text',value:'0'}]);
     }
     else if(op_type==='gray'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-            '</form>';
+        formularioHTML = templateForm(id,op_type,[]);
     }
     else if(op_type==='global_threshold'){
-        formularioHTML = '<form id="formulario-'+id+'">' +
-                                    '<input id="op_id" type="hidden" name="op_id" value='+id+'></input>' +
-                                    '<input id="op_type" type="hidden" name="op_type" value='+op_type+'></input>' +
-                                    '<label for="threshold">Threshold: </label>' +
-                                    '<input id="threshold" type="text" name="threshold" value="0"><br>' +
-            '</form>';
+        formularioHTML = templateForm(id,op_type,[{id:'threshold',label:'Threshold:',type:'range',value:'',min:'0',max:'255',step:'1'}]);
     }
     else{
         console.error('not a valid type', op_type);
@@ -112,16 +72,16 @@ function generarFormulario(id,op_type) {
 
 
     // Devolver el formulario generado
-    const form = document.createElement('form');
+    /*const form = document.createElement('form');
     form.innerHTML = formularioHTML;
-    form.id ="formulario-"+id;
-    return form;
+    form.id ="formulario-"+id;*/
+    return formularioHTML;
 }
 $('#config-container').on('input', 'input', function() {
     var formId = $(this).closest('form').attr('id');
     var fieldName = $(this).attr('name');
     var fieldValue = $(this).val();
-    console.log($(this));
+    //console.log($(this));
 
     if(fieldName==='source'){
         var file = $(this).prop('files')[0];
@@ -148,8 +108,61 @@ $('#config-container').on('input', 'input', function() {
         var x = formulariosPorElemento[formId.substring(11)].querySelector('#' + $(this).attr('id'));
         x.setAttribute('value',fieldValue) ;
     }
-
-    
-
-
 });
+
+function templateForm(id, type, elements){
+    var form = document.createElement('form');
+    form.id = 'formulario-' + id;
+
+    var inputOpId = document.createElement('input');
+    inputOpId.type = 'hidden';
+    inputOpId.name = 'op_id';
+    inputOpId.id = 'op_id';
+    inputOpId.value = id;
+    form.appendChild(inputOpId);
+
+    var inputOpType = document.createElement('input');
+    inputOpType.type = 'hidden';
+    inputOpType.name = 'op_type';
+    inputOpType.id = 'op_type';
+    inputOpType.value = type;
+    form.appendChild(inputOpType);
+
+    for(let element of elements){
+        var labelField = document.createElement('label');
+        labelField.setAttribute('for', element.id);
+        labelField.textContent = element.label;
+        form.appendChild(labelField);
+
+        var inputField = document.createElement('input');
+        form.appendChild(inputField);
+        inputField.id = element.id;
+        inputField.name = element.id;
+        inputField.value = element.value;
+        if(element.type==='text'){
+            inputField.type = element.type;
+        }
+        else if(element.type==='file'){
+            inputField.type = element.type;
+        }
+        else if(element.type==='range'){
+            inputField.type = element.type;
+            inputField.max = element.max;
+            inputField.min = element.min;
+            inputField.step = element.step;
+            var outputField = document.createElement('output');
+            outputField.textContent = inputField.value;
+            inputField.addEventListener("input", (event) => {
+              outputField.textContent = event.target.value;
+            });
+            form.appendChild(outputField);
+        }
+
+
+        form.appendChild(document.createElement('br'));
+    }
+
+
+
+    return form;
+}
