@@ -65,6 +65,11 @@ function generarFormulario(id,op_type) {
     else if(op_type==='global_threshold'){
         formularioHTML = templateForm(id,op_type,[{id:'threshold',label:'Threshold:',type:'range',value:'',min:'0',max:'255',step:'1'}]);
     }
+    else if(op_type==='adaptive_threshold'){
+        formularioHTML = templateForm(id,op_type,[{id:'block-size',label:'Block size:',type:'text',value:'20'},
+                                                        {id:'c',label:'C:',type:'text',value:'5'},
+                                                        {id:'mode',label:'Mode:',type:'text',value:'5'}]);
+    }
     else{
         console.error('not a valid type', op_type);
     }
@@ -81,7 +86,7 @@ $('#config-container').on('input', 'input', function() {
     var formId = $(this).closest('form').attr('id');
     var fieldName = $(this).attr('name');
     var fieldValue = $(this).val();
-    //console.log($(this));
+    console.log($(this));
 
     if(fieldName==='source'){
         var file = $(this).prop('files')[0];
@@ -150,11 +155,13 @@ function templateForm(id, type, elements){
             inputField.max = element.max;
             inputField.min = element.min;
             inputField.step = element.step;
+            inputField.value = element.min;
+            inputField.setAttribute('oninput',"this.nextElementSibling.value = this.value");
             var outputField = document.createElement('output');
-            outputField.textContent = inputField.value;
-            inputField.addEventListener("input", (event) => {
-              outputField.textContent = event.target.value;
-            });
+            outputField.textContent = element.min;
+            /*inputField.addEventListener("input", (event) => {
+              outputField.textContent = event.target.getAttribute('value');
+            });*/
             form.appendChild(outputField);
         }
 
